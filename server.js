@@ -13,7 +13,7 @@ server.get('/', (req, res) => {
 server.get('/games', (rec,rez) => {
     BubbaHoTep.getIt('games')
     .then(stuffs => {
-        rez.status(201).json(stuffs)
+        rez.status(200).json(stuffs)
     })
     .catch(err => {
         rez.status(500).json(err)
@@ -23,10 +23,10 @@ server.get('/games', (rec,rez) => {
 server.post('/games/add', (rec,rez) => {
     BubbaHoTep.putIt(rec.body)
     .then(junk => {
-        rez.status(202).json(junk)
+        rez.status(201).json(junk)
     })
     .catch(err => {
-        rez.status(501).json(err)
+        rez.status(422).json(err)
     })
 })
 

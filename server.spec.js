@@ -17,7 +17,7 @@ describe('getting the games', () => {
     it('should get status', async () => {
         const res = await request(server).get('/games');
 
-        expect(res.status).toBe(201);
+        expect(res.status).toBe(200);
     })
 
     it('should return json stuff', async () => {
@@ -26,11 +26,16 @@ describe('getting the games', () => {
         expect(res.type).toBe('application/json');
     })
 
-    // honestly I'm not real sure what a 3rd test should be
-    // on this endpoint, so here's a generic one...
     it('should set testing environment', () => {
         expect(process.env.DB_ENV).toBe('development');
     });
+
+    it('should return json stuff', async () => {
+        const res = await request(server).get('/games');
+        const hope = res.body;
+        //expect(res.body).toBe(Array.isArray(hope));
+        expect(Array.isArray(hope)).toBe(true);
+    })
 
 })
 
@@ -45,7 +50,7 @@ describe('putting in new games', function leonardo() {
     it('should get status without sending data', async () => {
         const res = await request(server).post('/games/add');
 
-        expect(res.status).toBe(501);
+        expect(res.status).toBe(422);
     })
 
     it('should set testing environment', () => {
