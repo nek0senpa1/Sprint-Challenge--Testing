@@ -14,7 +14,7 @@ describe('server stuff', () => {
 
 describe('getting the games', () => {
 
-    it('should get games', async () => {
+    it('should get status', async () => {
         const res = await request(server).get('/games');
 
         expect(res.status).toBe(201);
@@ -32,6 +32,24 @@ describe('getting the games', () => {
         expect(process.env.DB_ENV).toBe('development');
     });
 
+})
 
+describe('putting in new games', function leonardo() {
+
+    it('should return correct type of data', async () => {
+        const newstuff = await request(server).post('/games/add');
+
+        expect(newstuff.type).toBe('application/json')
+    })
+
+    it('should get status without sending data', async () => {
+        const res = await request(server).post('/games/add');
+
+        expect(res.status).toBe(501);
+    })
+
+    it('should set testing environment', () => {
+        expect(process.env.DB_ENV).toBe('development');
+    });
 
 })

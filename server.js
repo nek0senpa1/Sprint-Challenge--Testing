@@ -20,4 +20,14 @@ server.get('/games', (rec,rez) => {
     })
 })
 
+server.post('/games/add', (rec,rez) => {
+    BubbaHoTep.putIt(rec.body)
+    .then(junk => {
+        rez.status(202).json(junk)
+    })
+    .catch(err => {
+        rez.status(501).json(err)
+    })
+})
+
 module.exports = server;
