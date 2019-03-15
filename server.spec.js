@@ -2,6 +2,8 @@ const request = require('supertest');
 
 const server = require('./server.js');
 
+const deebee = require('./duhBee/configypudding')
+
 describe('server stuff', () => {
 
     it('should return 200', async () => {
@@ -41,6 +43,10 @@ describe('getting the games', () => {
 
 describe('putting in new games', function leonardo() {
 
+    // afterEach(async () => {
+    //     await deebee('games').truncate();
+    //     });
+
     it('should return correct type of data', async () => {
         const newstuff = await request(server).post('/games/add');
 
@@ -56,5 +62,18 @@ describe('putting in new games', function leonardo() {
     it('should set testing environment', () => {
         expect(process.env.DB_ENV).toBe('development');
     });
+
+    it('should get status sending right data', async () => {
+        const res = await request(server).post('/games/add')
+        .send(
+            {
+                title: 'Frogger 3', 
+                genre: 'Platform', 
+                releaseYear: 1984 
+              }
+        );
+
+        expect(res.status).toBe(201);
+    })
 
 })
